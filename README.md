@@ -14,3 +14,23 @@ $ClientSecretCredential = Get-Credential -Credential $Credential
 Connect-MgGraph -TenantId $tenantid -ClientSecretCredential $ClientSecretCredential
 Get-MgContext
 ``` 
+### Authenticate to Microsoft Graph PowerShell using secret - Invoke-RestMethod
+```pwsh
+$appid = "x-4e11-b18e-6db395c662aa"
+$tenantid = 'x-439d-b5bd-f5b83846ddee'
+$secret = 'xiWElQANwX~m4R7-MaGcr1'
+$body =  @{
+    Grant_Type    = "client_credentials"
+    Scope         =  "https://graph.microsoft.com/.default"
+    Client_Id     = $appid
+    Client_Secret = $secret
+}
+$connection = Invoke-RestMethod `
+    -Uri "https://login.microsoftonline.com/$tenantid/oauth2/v2.0/token" `
+    -Method POST `
+    -Body $body
+$token = $connection.access_token
+$secureToken = ConvertTo-SecureString $token -AsPlainText -Force
+Connect-MgGraph -AccessToken $secureToken
+Get-MgContext
+```
