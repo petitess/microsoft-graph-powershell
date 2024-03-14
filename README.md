@@ -34,3 +34,16 @@ $secureToken = ConvertTo-SecureString $token -AsPlainText -Force
 Connect-MgGraph -AccessToken $secureToken
 Get-MgContext
 ```
+### List sharepoint sites (retrive $token from previous code)
+```pwsh
+$Url = "https://graph.microsoft.com/v1.0/sites"
+$headers = @{
+    "Authorization" = "Bearer $token"
+    "Content-type"  = "application/json"
+}
+$connection = Invoke-RestMethod `
+    -Uri $Url `
+    -Method GET `
+    -Headers $headers
+$connection.value
+```
