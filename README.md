@@ -2,7 +2,7 @@
 
 ### Authenticate to Microsoft Graph PowerShell using secret
 1. Entra Id > App registration > New registration
-2. API permissions > Add a permission
+2. API permissions > Add a permission > Microsoft Graph > Application permissions
 3. Create a secret
 4. Run the script:
 ```pwsh
