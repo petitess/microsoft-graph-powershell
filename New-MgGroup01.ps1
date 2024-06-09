@@ -2,7 +2,7 @@ $User = 'x-bcb9-7ba91c64e58d'
 $GrpName = 'grp-graph-01'
 
 if (!(Get-MgGroup -Filter "DisplayName eq '$GrpName'")) {
-    Write-Output "grp-graph-01 doesn't exist"
+    Write-Output "Creating grp-graph-01"
     $GrpId = (New-MgGroup -DisplayName 'grp-graph-01' -MailNickName 'grp-graph-01' -MailEnabled:$False -SecurityEnabled).Id
     New-MgGroupMember -GroupId $GrpId -DirectoryObjectId $User
 }
