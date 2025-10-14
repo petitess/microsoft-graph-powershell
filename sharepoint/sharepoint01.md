@@ -31,6 +31,7 @@ Remove-MgDriveItemPermission -DriveId $driveId -DriveItemId $fileId -PermissionI
 Make API call using service principal to download a file
 ```pwsh
 #Get graph token
+#Sites.Read.All & Files.SelectedOperations.Selected
 $appid = "12345678-5bf6-4029-12345678"
 $tenantid = '12345678-ae44-48b7-a392-12345678'
 $secret = '12345678GEIGgzOQ2mvs-vLOmPaXfvqaVP'
