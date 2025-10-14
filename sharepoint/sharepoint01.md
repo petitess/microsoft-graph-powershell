@@ -50,8 +50,8 @@ $headers = @{
     "Authorization" = "Bearer $token"
     "Content-type"  = "application/json"
 }
-$SiteId = "12345678-47d9-8ba5-12345678"
-$DriveId = "b!razPd_HO2UeLpe1yvCtN27UrgykLaeNLpXDgeWZfz47taPBFbhjHQoxOlF6hlQrg"
+$SiteId = (Get-MgSite | Where-Object DisplayName -eq "Power BI rapporter").Id
+$DriveId = (Get-MgSiteDrive -SiteId $siteId | Where-Object Name -eq "Documets").Id
 $FilePath = "Konkurs/Konkurs och rekonstruktionslista.xlsx"
 $UrlD = "https://graph.microsoft.com/v1.0/sites/$SiteId/drives/$DriveId/root:/$($FilePath):/"
 $Download = (Invoke-RestMethod `
