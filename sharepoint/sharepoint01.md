@@ -45,6 +45,8 @@ $connection = Invoke-RestMethod `
     -Method POST `
     -Body $body
 $token = $connection.access_token
+$secureToken = ConvertTo-SecureString $token -AsPlainText -Force
+Connect-MgGraph -AccessToken $secureToken
 #Get download link to the file
 $headers = @{
     "Authorization" = "Bearer $token"
