@@ -10,7 +10,7 @@ Connect-MgGraph -Scopes "Sites.FullControl.All"
 
 Assign permission to a specific file
 ```pwsh
-$siteId = (Get-MgSite | Where-Object DisplayName -eq "Power BI rapporter").Id
+$siteId = (Get-MgSite -All | Where-Object DisplayName -eq "Power BI rapporter").Id
 $driveId = (Get-MgSiteDrive -SiteId $siteId | Where-Object Name -eq "Dokument").Id  # Library name
 $KonkursId = (Get-MgDriveItemChild -DriveId $driveId -DriveItemId "root" -Filter "name eq 'Konkurs'").Id
 $fileId = (Get-MgDriveItemChild -DriveId $driveId -DriveItemId $KonkursId -Filter "name eq 'Konkurs och rekonstruktionslista.xlsx'").Id
@@ -53,7 +53,7 @@ $headers = @{
     "Authorization" = "Bearer $token"
     "Content-type"  = "application/json"
 }
-$SiteId = (Get-MgSite | Where-Object DisplayName -eq "Power BI rapporter").Id
+$SiteId = (Get-MgSite -All | Where-Object DisplayName -eq "Power BI rapporter").Id
 $DriveId = (Get-MgSiteDrive -SiteId $siteId | Where-Object Name -eq "Documets").Id
 $FilePath = "Konkurs/Konkurs och rekonstruktionslista.xlsx"
 $UrlD = "https://graph.microsoft.com/v1.0/sites/$SiteId/drives/$DriveId/root:/$($FilePath):/"
