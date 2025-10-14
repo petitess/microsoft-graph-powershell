@@ -10,7 +10,7 @@ Connect-MgGraph -Scopes "Sites.FullControl.All"
 
 Assign permission to a specific file
 ```pwsh
-$siteId = "12345678-cef1-47d9-8ba5-12345678"
+$siteId = (Get-MgSite | Where-Object DisplayName -eq "Power BI rapporter").Id
 $driveId = (Get-MgSiteDrive -SiteId $siteId | Where-Object Name -eq "Dokument").Id  # Library name
 $KonkursId = (Get-MgDriveItemChild -DriveId $driveId -DriveItemId "root" -Filter "name eq 'Konkurs'").Id
 $fileId = (Get-MgDriveItemChild -DriveId $driveId -DriveItemId $KonkursId -Filter "name eq 'Konkurs och rekonstruktionslista.xlsx'").Id
