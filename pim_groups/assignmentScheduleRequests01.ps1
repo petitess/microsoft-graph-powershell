@@ -34,3 +34,6 @@ $Script = ConvertTo-Json @{
 }
 
 Invoke-MgGraphRequest -Uri "/v1.0/identityGovernance/privilegedAccess/group/eligibilityScheduleRequests" -Method POST -Body $Script
+
+##Get assigments for a group
+(Invoke-MgGraphRequest -Uri "/v1.0/identityGovernance/privilegedAccess/group/eligibilitySchedules?`$filter=groupId eq '12345678-4ce9-a248-9815a0f0917d'").value | ConvertTo-Json -Depth 100
