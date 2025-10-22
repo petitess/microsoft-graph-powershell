@@ -47,3 +47,7 @@ $connection = Invoke-RestMethod `
     -Headers $headers
 $connection.value
 ```
+### Filter
+```pwsh
+Invoke-MgGraphRequest -Uri "/v1.0/policies/roleManagementPolicies?`$filter=scopeId eq '/' and scopeType eq 'DirectoryRole'"
+```
