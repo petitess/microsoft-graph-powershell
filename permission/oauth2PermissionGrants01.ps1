@@ -11,3 +11,7 @@ $IMg = Invoke-MgGraphRequest -Uri "/v1.0/oauth2PermissionGrants" -Method POST -B
 $IMg
 
 Invoke-MgGraphRequest -Uri "/v1.0/oauth2PermissionGrants/IIpVCLIqmEqCMASBVVulIh9Blec6DN1JjK9IevnWdjY" -Method DELETE
+
+(Invoke-MgGraphRequest -Uri "/v1.0/oauth2PermissionGrants").value
+(Invoke-MgGraphRequest -Uri "/v1.0/oauth2PermissionGrants?`$filter=clientId eq '08558a20-2ab2-4a98-8230-0481555ba522'").value
+(Invoke-MgGraphRequest -Uri "/v1.0/oauth2PermissionGrants?`$filter=resourceId eq 'e795411f-0c3a-49dd-8caf-487af9d67636'").value
