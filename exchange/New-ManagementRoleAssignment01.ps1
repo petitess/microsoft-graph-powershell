@@ -35,7 +35,7 @@ New-ManagementRoleAssignment -App $App.AppId -Role "Application MailboxSettings.
 #Test a user
 Test-ServicePrincipalAuthorization -Identity $App.AppId -Resource "user.one@abcd.se"
 Test-ServicePrincipalAuthorization -Identity $App.AppId -Resource "user.two@abcd.se"
-#Login with service principal used for exchange online(sp-mail-limited-test)
+#If yoou own app registration, login with service principal used for exchange online(sp-mail-limited-test)
 #Make Api Call to get user calendar
 Invoke-GraphRequest -Uri "/v1.0/users/user.one@abcd.se/calendar"
 Invoke-GraphRequest -Uri "/v1.0/users/user.two@abcd.se/calendar"
