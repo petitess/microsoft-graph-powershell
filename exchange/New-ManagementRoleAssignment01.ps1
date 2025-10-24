@@ -6,9 +6,19 @@
 $appid = "abc"
 $tenantid = 'abc'
 $secret = 'abc'
-$secret = ConvertTo-SecureString -String $secretPlain -AsPlainText -Force
-$ClientSecretCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $appid, $secret
-Connect-MgGraph -TenantId $tenantid -ClientSecretCredential $ClientSecretCredential -NoWelcome
+$body =  @{
+    Grant_Type    = "client_credentials"
+    Scope         =  "https://graph.microsoft.com/.default"
+    Client_Id     = $appid
+    Client_Secret = $secret
+}
+$connection = Invoke-RestMethod `
+    -Uri "https://login.microsoftonline.com/$tenantid/oauth2/v2.0/token" `
+    -Method POST `
+    -Body $body
+$token = $connection.access_token
+$secureToken = ConvertTo-SecureString $token -AsPlainText -Force
+Connect-MgGraph -AccessToken $secureToken
 Get-MgContext
 
 #Authenticate to exchange online
