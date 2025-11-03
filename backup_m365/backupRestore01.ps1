@@ -1,3 +1,5 @@
+#https://learn.microsoft.com/en-us/microsoft-365/backup/storage/backup-3p-lifecycle?view=o365-worldwide
+#Sign in with app registration which will be connected to M365 backup 
 $appid = "abc"
 $tenantid = 'abc'
 $secret = 'abc'
@@ -28,6 +30,13 @@ Invoke-MgGraphRequest -Uri "/v1.0/solutions/backupRestore/protectionPolicies"
 Invoke-MgGraphRequest -Uri "/v1.0/solutions/backupRestore/protectionUnits/microsoft.graph.siteProtectionUnit"
 Invoke-MgGraphRequest -Uri "/v1.0/solutions/backupRestore/sharePointProtectionPolicies"
 
+#Activate your application to be the Microsoft 365 Backup Storage Controller
+$Body = @"
+{
+    "effectiveDateTime" :"$([System.DateTime]::Parse("2024-04-19T12:01:03.45Z"))",
+}
+"@
+Invoke-MgGraphRequest -Uri "/v1.0/solutions/backupRestore/serviceApps/123-abc/activate" -Method POST -Body $Body
 
 $Error01 = @"
 {
