@@ -64,3 +64,5 @@ $Error02 = @"
     }
 }
 "@
+#It work if you login with personal account
+Connect-MgGraph -Scopes "BackupRestore-Configuration.ReadWrite.All BackupRestore-Control.ReadWrite.All BackupRestore-Monitor.Read.All BackupRestore-Restore.ReadWrite.All BackupRestore-Search.Read.All"
