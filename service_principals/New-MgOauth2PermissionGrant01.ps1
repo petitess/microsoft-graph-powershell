@@ -1,7 +1,7 @@
 # Connect with the necessary admin scopes
 Connect-MgGraph -Scopes "DelegatedPermissionGrant.ReadWrite.All", "Application.Read.All"
 
-$serverApplicationName = "GroupAccessTest"
+$serverApplicationName = "MyAppName"
 $sp = Get-MgServicePrincipal -Filter "DisplayName eq '$serverApplicationName'"
 
 # Microsoft Graph Service Principal
