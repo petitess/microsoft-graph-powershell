@@ -14,3 +14,11 @@ $body = @{
 }
 # Invoke-GraphRequest -Method GET -Uri "v1.0/applications/$AppRegObjectId" -Headers $headers
 Invoke-GraphRequest -Method POST -Uri "v1.0/applications/$AppRegObjectId/addPassword" -Headers $headers -Body ($body | ConvertTo-Json -Depth 10)
+#Remove
+$Secrets = (Invoke-GraphRequest -Method GET -Uri "v1.0/applications/$AppRegObjectId" -Headers $headers).passwordCredentials.keyId
+$Secrets | ForEach-Object {
+    $body = @{
+        keyId = $_
+    }
+    Invoke-GraphRequest -Method POST -Uri "v1.0/applications/$AppRegObjectId/removePassword" -Headers $headers -Body ($body | ConvertTo-Json -Depth 10)
+}
