@@ -4,15 +4,29 @@ $user2 = (Invoke-MgGraphRequest -Uri "/v1.0/users?`$filter=mail eq 'sara.goden@a
 (Invoke-MgGraphRequest -Uri "/v1.0/groups?`$filter=startswith(displayName, 'EpiserverAbcPublic-')&`$select=displayName,id").value[0] | ForEach-Object {
     Write-Output "Group Name: $($_.displayName) - Group ID: $($_.id)"
 
-    $body = @{
-        "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$user1"
-    } | ConvertTo-Json
+    $Exists1 = (Invoke-MgGraphRequest -Uri "/v1.0/groups/$($_.id)/members").value.id | Where-Object { $_ -eq $user1 }
+    if ($Exists1) {
+        Write-Output "User1 already a member."
+    }
+    else {
+        Write-Output "Adding User1 to group..."
+        $body = @{
+            "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$user1"
+        } | ConvertTo-Json
 
-    $Added1 = Invoke-MgGraphRequest -Method POST -Body $body -Uri "/v1.0/groups/$($_.id)/members/$('$ref')"
+        Invoke-MgGraphRequest -Method POST -Body $body -Uri "/v1.0/groups/$($_.id)/members/$('$ref')"
+    }
 
-    $body = @{
-        "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$user2"
-    } | ConvertTo-Json
+    $Exists2 = (Invoke-MgGraphRequest -Uri "/v1.0/groups/$($_.id)/members").value.id | Where-Object { $_ -eq $user2 }
+    if ($Exists2) {
+        Write-Output "User2 already a member."
+    }
+    else {
+        Write-Output "Adding User2 to group..."
+        $body = @{
+            "@odata.id" = "https://graph.microsoft.com/v1.0/directoryObjects/$user2"
+        } | ConvertTo-Json
 
-    $Added2 = Invoke-MgGraphRequest -Method POST -Body $body -Uri "/v1.0/groups/$($_.id)/members/$('$ref')"
+        Invoke-MgGraphRequest -Method POST -Body $body -Uri "/v1.0/groups/$($_.id)/members/$('$ref')"
+    }
 }
