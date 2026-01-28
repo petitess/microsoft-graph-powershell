@@ -1,5 +1,6 @@
 #UserAuthenticationMethod.ReadWrite.All
 #Only personal account
+#Self-service is required
 
 (Invoke-MgGraphRequest -Uri "/v1.0/users?`$filter=userPrincipalName eq 'pim.karol.sek@abc.onmicrosoft.com'").value
 (Invoke-MgGraphRequest -Uri "/v1.0/users/kar.sek.ext@abc.se/authentication/methods").value
