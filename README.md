@@ -34,18 +34,15 @@ $secureToken = ConvertTo-SecureString $token -AsPlainText -Force
 Connect-MgGraph -AccessToken $secureToken
 Get-MgContext
 ```
-### List sharepoint sites (retrive $token from previous code)
+### Authenticate to Microsoft Graph PowerShell using personal account and custom app registration
+
+Assign Delegated permission to the app e.g `User.ReadWrite.All, UserAuthenticationMethod.ReadWrite.All`
+
+Add Redirect URI: Authentication → Add a platform → Mobile and desktop applications
+
+Add: `http://localhost` and `https://login.microsoftonline.com/common/oauth2/nativeclient`
 ```pwsh
-$Url = "https://graph.microsoft.com/v1.0/sites"
-$headers = @{
-    "Authorization" = "Bearer $token"
-    "Content-type"  = "application/json"
-}
-$connection = Invoke-RestMethod `
-    -Uri $Url `
-    -Method GET `
-    -Headers $headers
-$connection.value
+Connect-MgGraph -Scopes "User.ReadWrite.All","UserAuthenticationMethod.ReadWrite.All" -ClientId "abc" -TenantId "abc"
 ```
 ### Filter
 ```pwsh
