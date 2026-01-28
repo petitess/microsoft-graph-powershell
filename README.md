@@ -40,7 +40,7 @@ Assign Delegated permission to the app e.g `User.ReadWrite.All, UserAuthenticati
 
 Add Redirect URI: Authentication → Add a platform → Mobile and desktop applications
 
-Add: `http://localhost` and `https://login.microsoftonline.com/common/oauth2/nativeclient`
+Add: `http://localhost`, `https://login.microsoftonline.com/common/oauth2/nativeclient` and `ms-appx-web://Microsoft.AAD.BrokerPlugin/<client_id>`
 ```pwsh
 Connect-MgGraph -Scopes "User.ReadWrite.All","UserAuthenticationMethod.ReadWrite.All" -ClientId "abc" -TenantId "abc"
 ```
