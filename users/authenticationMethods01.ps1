@@ -16,6 +16,7 @@ $Users | ForEach-Object {
 }
 
 #Table output
+$Users = (Invoke-MgGraphRequest -Uri "v1.0/users?`$filter=startswith(displayName, '365-admin')").value
 $Results = $Users | ForEach-Object {
     $Upn = $_.UserPrincipalName
     $Id  = $_.Id
