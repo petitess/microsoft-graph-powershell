@@ -1,5 +1,6 @@
 #https://learn.microsoft.com/en-us/graph/api/driveitem-get-content?view=graph-rest-1.0&tabs=http
 #Files.Read.All
+
 (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/root" )
 (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/companyname.sharepoint.com" )
 (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/companyname.sharepoint.com:/sites/ADL-B3" )
