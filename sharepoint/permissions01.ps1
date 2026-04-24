@@ -9,7 +9,7 @@ $Body = @{
 
 $newFolder = (Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/root/children"-Body $Body)
 
-$newFolder = (Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/01RRNAIB7RYVUGBUMQEJAKG7QJUIJIYR2B/children" -Body $Body)
+$newFolder = (Invoke-MgGraphRequest -Method POST -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/01RRNAIB7RYVUGBUMQEJAKG7QJUIJIYR2C/children" -Body $Body)
 
 $Body = @{
     roles       = @("write")
