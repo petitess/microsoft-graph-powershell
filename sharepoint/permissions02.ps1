@@ -20,7 +20,7 @@ $Body = @{
     roles       = @("write")
     grantedToV2 = @{
         application = @{
-            id          = "1d2c3bef-77e8-4ff6-a399-8efa5dc20f10"
+            id          = "1d2c3bef-77e8-4ff6-a399-8efa5dc20f11"
             displayName = "sp-shp-adl-a3"
         }
     }
