@@ -15,10 +15,6 @@ $Files = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1
 $Files | ForEach-Object {
     (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/$($_.id)/content" -OutputFilePath "./$($_.name)")
 }
-
-(Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/01RRNAIB7RYVUGBUMQEJAKG7QJUIJIYR2B/children").value
-
-(Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/$FolderId/content" -OutputFilePath ./test.md)
 #Download from new library
 $DocId = ((Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives").value | Where-Object { $_.name -eq "SYSTEM" }).id
 $FolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/root/children?`$filter=name eq 'customerX'").value.id
