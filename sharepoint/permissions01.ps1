@@ -1,3 +1,4 @@
+#https://learn.microsoft.com/en-us/graph/api/site-post-permissions?view=graph-rest-1.0&tabs=http
 #Files.ReadWrite.All 	Sites.ReadWrite.All Files.SelectedOperations.Selected Files.ReadWrite.AppFolder
 $siteId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/root:/sites/ADL-A3" ).id
 
