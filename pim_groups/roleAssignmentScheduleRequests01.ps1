@@ -1,4 +1,4 @@
-# https://learn.microsoft.com/en-us/graph/api/rbacapplication-post-roleassignmentschedulerequests?view=graph-rest-1.0&tabs=http
+#https://learn.microsoft.com/en-us/graph/api/rbacapplication-post-roleassignmentschedulerequests?view=graph-rest-1.0&tabs=http
 #RoleAssignmentSchedule.ReadWrite.Directory 	
 #Doesnt work with MFA
 $roleName = 'Teams Administrator'
