@@ -18,8 +18,18 @@ $Files | ForEach-Object {
 #Download from new library
 $DocId = ((Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives").value | Where-Object { $_.name -eq "SYSTEM" }).id
 $FolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/root/children?`$filter=name eq 'customerX'").value.id
+$NewFolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/root/children?`$filter=name eq 'customerX-archive'").value.id
 $Files = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/$FolderId/children").value
 
 $Files | ForEach-Object {
+    #Download
     (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/$($_.id)/content" -OutputFilePath "./$($_.name)")
+    #Move
+    $Body = @{
+        "name"            = "old_$($_.name)"
+        "parentReference" = @{
+            "id" = $NewFolderId
+        }
+    }
+    (Invoke-MgGraphRequest -Method PATCH -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drives/$DocId/items/$($_.id)" -Body $Body)
 }
