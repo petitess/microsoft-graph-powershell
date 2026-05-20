@@ -16,9 +16,9 @@ Get-MgContext
 ``` 
 ### Authenticate to Microsoft Graph PowerShell using secret - Invoke-RestMethod
 ```pwsh
-$appid = "x-4e11-b18e-6db395c662aa"
-$tenantid = 'x-439d-b5bd-f5b83846ddee'
-$secret = 'xiWElQANwX~m4R7-MaGcr1'
+$appid = $env:mg_x_root_01_id
+$tenantid = $env:x_tenant
+$secret = $env:mg_x_root_01_secret
 $body =  @{
     Grant_Type    = "client_credentials"
     Scope         =  "https://graph.microsoft.com/.default"
