@@ -6,7 +6,7 @@ $SubFolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.
 $SubSubFolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/beta/users/$($User)/drive/items/$($SubFolderId)/children?`$filter=name eq 'Förberedelse HandOver'").value.id
 $Files = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/beta/users/$($User)/drive/items/$($SubSubFolderId)/children").value
 
-$siteId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/root:/sites/AlmiInvestBusinessControlochSupport-BusinessSupport-O" ).id
+$siteId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/root:/sites/InvestBusinessControlochSupport-BusinessSupport" ).id
 $destDriveId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/root/").parentReference.driveId
 $FolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/root/children?`$filter=name eq 'System support'").value.id
 $DesSubFolderId = (Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/drive/items/$FolderId/children?`$filter=name eq 'Mod MANUALER KPB_26'").value.id
