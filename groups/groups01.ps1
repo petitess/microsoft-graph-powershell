@@ -17,3 +17,8 @@ $Body = ConvertTo-Json @{
 }
 
 $Script = Invoke-MgGraphRequest -Uri "/v1.0/groups" -Method POST -Body $Body 
+#PATCH uniqueName can be udated only once, immutable
+$Body = ConvertTo-Json @{
+    uniqueName     = "grp-az-sql-app-prod-admin"
+}
+Invoke-MgGraphRequest -Uri "/v1.0/groups/86429c4f-dea0-468b-b7d2-3a5c2c6e74c6" -Method PATCH -Body $Body
