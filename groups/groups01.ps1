@@ -18,7 +18,17 @@ $Body = ConvertTo-Json @{
 
 $Script = Invoke-MgGraphRequest -Uri "/v1.0/groups" -Method POST -Body $Body 
 #PATCH uniqueName can be udated only once, immutable
-$Body = ConvertTo-Json @{
-    uniqueName     = "grp-az-sql-app-prod-admin"
+$groups = @(
+    [PSCustomObject]@{ Name = "grp-dev-sys1-user-PIM-DEV"; Id = "2095c832-2768-4ce9-a248-9815a0f0917d" }
+    [PSCustomObject]@{ Name = "grp-dev-sys1-user-PIM-TEST"; Id = "62a4f638-2a82-41af-913c-3d01370be77a" }
+) 
+
+$groups | ForEach-Object {
+    Write-Output $_.Name
+    Write-Output "/v1.0/groups/$($_.Id)"
+    $Body = ConvertTo-Json @{
+        uniqueName = $_.Name
+    }
+    $Body
+    Invoke-MgGraphRequest -Uri "/v1.0/groups/$($_.Id)" -Method PATCH -Body $Body
 }
-Invoke-MgGraphRequest -Uri "/v1.0/groups/86429c4f-dea0-468b-b7d2-3a5c2c6e74c6" -Method PATCH -Body $Body
